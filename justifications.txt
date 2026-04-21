@@ -15,7 +15,8 @@ Les scripts Python envoient automatiquement des requêtes à l’API afin de tes
 
 
 4/ Tests
-3 types de tests sont réalisés : - authentication qui vérifie les utilisateurs
+3 types de tests sont réalisés : 
+                 - authentication qui vérifie les utilisateurs
 				 - authorization qui vérifie les droits d'accès
 				 - content qui vérifie l'analyse de texte (sentiment)
 
