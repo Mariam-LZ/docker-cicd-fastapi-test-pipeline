@@ -1,0 +1,27 @@
+1/ Architecture
+Elle contient : - Une API centrale (FastAPI) dans son propre container, indépendante des tests
+				- 3 services de test : Authentication, Authorization et Content
+				- Une communication via réseau Docker, quón a nommé ici "my_network"
+
+
+2/ Docker Compose
+Chaque test est isolé dans son propre container afin que la modification ou la défaillance d'un test n'impacte pas les autres. 
+Le depends_on dans le docker-compose.yml garantit que les tests s'exécutent dans le bon ordre : authentication → authorization → content. 
+Docker Compose permet de lancer toute l'infrastructure en une seule commande.
+
+
+3/ Scripts Python
+Les scripts Python envoient automatiquement des requêtes à l’API afin de tester ses différentes fonctionnalités et vérifier que les réponses obtenues sont correctes.
+
+
+4/ Tests
+3 types de tests sont réalisés : - authentication qui vérifie les utilisateurs
+				 - authorization qui vérifie les droits d'accès
+				 - content qui vérifie l'analyse de texte (sentiment)
+
+
+5/ Logs & Résultats
+les résultats des tests sont enregistrés dans un fichier api_test.log grâce à un volume partagé entre tous les containers et la machine
+
+6/ Setup.sh
+Ce script bash permet d'executer en une seule manipulation les 2 commandes docker compose build et docker compose run pour respectivement construire les images des 3 conteneurs puis de lancer les conteneurs correspondants.
